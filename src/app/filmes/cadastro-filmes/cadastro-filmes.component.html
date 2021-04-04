@@ -1,40 +1,66 @@
 <mat-toolbar class="app-title">Cadastrar Filme</mat-toolbar>
 <div class="main-div">
   <mat-card class="center width50" >
+    <form [formGroup]="cadastro" (ngSubmit)="salvar()" (ngReset)="resetarForm()">
       <mat-card-content>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Título">
+            <input matInput placeholder="informe o título *" name="titulo" formControlName="titulo">
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.titulo.errors && f.titulo.errors.required">o título deve ser informado</mat-error>
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.titulo.errors && f.titulo.errors.minlength">o título deve ter no mínimo 5 dígitos</mat-error>
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.titulo.errors && f.titulo.errors.maxlength">o título deve ter no máximo 100 dígitos</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Link Foto">
+            <input matInput placeholder="informe o link da foto" name="urlFoto" formControlName="urlFoto">
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.urlFoto.errors && f.urlFoto.errors.minlength">se preenchido o link da foto deve ter no mínimo 10 dígitos</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width">
-              <input matInput [matDatepicker]="picker" placeholder="Data de Lançamento">
+              <input matInput
+                     readonly
+                     [matDatepicker]="picker"
+                     placeholder="informe a data de lançamento *"
+                     name="dtLancamento"
+                     formControlName="dtLancamento"
+                     (click)="picker.open()">
+              <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.dtLancamento.errors && f.dtLancamento.errors.required">a data de lançamento deve ser informada</mat-error>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           <mat-form-field class="full-width">
-            <textarea matInput placeholder="Descrição"></textarea>
+            <textarea matInput placeholder="informe a descrição"
+                      name="descricao" formControlName="descricao">
+            </textarea>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Nota IMDb">
+            <input  matInput
+                    placeholder="informe a Nota IMDb *"
+                    name="nota" formControlName="nota"
+                    type="number"
+                    min="0"
+                    max="10"
+                    step="0.1">
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.nota.errors && f.nota.errors.required">a nota deve ser informada</mat-error>
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.nota.errors && f.nota.errors.min">a nota deve ter no mínimo 0 </mat-error>
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.nota.errors && f.nota.errors.max">a nota deve ter no máximo 10</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput placeholder="Link IMDb">
+            <input matInput placeholder="informe o link IMDb" name="urlImdb" formControlName="urlImdb">
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.urlImdb.errors && f.urlImdb.errors.minlength">se preenchido o link IMDb deve ter no mínimo 10 dígitos</mat-error>
           </mat-form-field>
           <mat-form-field class="full-width">
-            <mat-select placeholder="Gênero">
+            <mat-select placeholder="selecione o gênero *" formControlName="genero">
               <mat-option value="Ação">Açao</mat-option>
               <mat-option value="Aventura">Aventura</mat-option>
-              <mat-option value=">Ficção Científica">Ficção Científica</mat-option>
+              <mat-option value="Ficção Científica">Ficção Científica</mat-option>
               <mat-option value="Romance">Romance</mat-option>
               <mat-option value="Terror">Terror</mat-option>
             </mat-select>
+            <mat-error *ngIf="(cadastro.touched || cadastro.dirty) && f.genero.errors && f.genero.errors.required">o gênero deve ser informado</mat-error>
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-          <button color="accent" mat-raised-button>Salvar</button>
-          <button color="warn" mat-raised-button>Cancelar</button>
+          <button type="submit" color="accent" mat-raised-button>Salvar</button>
+          <button type="reset" color="warn" mat-raised-button>Limpar formulário</button>
         </mat-card-actions>
+      </form>
   </mat-card>
 </div>
