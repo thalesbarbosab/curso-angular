@@ -3,59 +3,13 @@
   <mat-card class="center width50" >
     <form [formGroup]="cadastro" (ngSubmit)="salvar()" (ngReset)="resetarForm()">
       <mat-card-content>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="informe o título *" name="titulo" formControlName="titulo">
-            <mat-error *ngIf="validacao.hasErrorValidar(f.titulo,'required')">o título deve ser informado</mat-error>
-            <mat-error *ngIf="validacao.hasErrorValidar(f.titulo,'minlength')">o título deve ter no mínimo 5 dígitos</mat-error>
-            <mat-error *ngIf="validacao.hasErrorValidar(f.titulo,'maxlength')">o título deve ter no máximo 100 dígitos</mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="informe o link da foto" name="urlFoto" formControlName="urlFoto">
-            <mat-error *ngIf="validacao.hasErrorValidar(f.urlFoto,'minlength')">se preenchido o link da foto deve ter no mínimo 10 dígitos</mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-              <input matInput
-                     readonly
-                     [matDatepicker]="picker"
-                     placeholder="informe a data de lançamento *"
-                     name="dtLancamento"
-                     formControlName="dtLancamento"
-                     (click)="picker.open()">
-              <mat-error *ngIf="validacao.hasErrorValidar(f.dtLancamento,'required')">a data de lançamento deve ser informada</mat-error>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          <mat-form-field class="full-width">
-            <textarea matInput placeholder="informe a descrição"
-                      name="descricao" formControlName="descricao">
-            </textarea>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input  matInput
-                    placeholder="informe a Nota IMDb *"
-                    name="nota" formControlName="nota"
-                    type="number"
-                    min="0"
-                    max="10"
-                    step="0.1">
-            <mat-error *ngIf="validacao.hasErrorValidar(f.nota,'required')">a nota deve ser informada</mat-error>
-            <mat-error *ngIf="validacao.hasErrorValidar(f.nota,'min')">a nota deve ter no mínimo 0 </mat-error>
-            <mat-error *ngIf="validacao.hasErrorValidar(f.nota,'max')">a nota deve ter no máximo 10</mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="informe o link IMDb" name="urlImdb" formControlName="urlImdb">
-            <mat-error *ngIf="validacao.hasErrorValidar(f.urlImdb,'minlength')">se preenchido o link IMDb deve ter no mínimo 10 dígitos</mat-error>
-          </mat-form-field>
-          <mat-form-field class="full-width">
-            <mat-select placeholder="selecione o gênero *" formControlName="genero">
-              <mat-option value="Ação">Açao</mat-option>
-              <mat-option value="Aventura">Aventura</mat-option>
-              <mat-option value="Ficção Científica">Ficção Científica</mat-option>
-              <mat-option value="Romance">Romance</mat-option>
-              <mat-option value="Terror">Terror</mat-option>
-            </mat-select>
-            <mat-error *ngIf="validacao.hasErrorValidar(f.genero,'required')">o gênero deve ser informado</mat-error>
-          </mat-form-field>
+        <dio-input-text titulo="título*" controlName="titulo" [formGroup]="cadastro"></dio-input-text>
+        <dio-input-text titulo="link da foto*" controlName="urlFoto" [formGroup]="cadastro"></dio-input-text>
+        <dio-input-date titulo="data lançamento*" controlName="dtLancamento" [formGroup]="cadastro"></dio-input-date>
+        <dio-input-textarea titulo="descrição" controlName="descricao" [formGroup]="cadastro"></dio-input-textarea>
+        <dio-input-number titulo="nota imdb*" controlName="nota" [formGroup]="cadastro" step="0.1" minimo="0" maximo="10"></dio-input-number>
+        <dio-input-text titulo="link IMDb*" controlName="urlImdb" [formGroup]="cadastro"></dio-input-text>
+        <dio-input-select titulo="gênero*" controlName="genero" [formGroup]="cadastro"></dio-input-select>
         </mat-card-content>
         <mat-card-actions>
           <button type="submit" color="accent" mat-raised-button>Salvar</button>
