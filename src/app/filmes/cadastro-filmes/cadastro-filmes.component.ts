@@ -74,7 +74,16 @@ export class CadastroFilmesComponent implements OnInit {
       });
     },
     ()=>{
-      alert('Erro!')
+      const config = {
+        data: {
+          titulo : 'Erro!',
+          descricao: 'Erro ao salvar o filme, tente novamente.',
+          btnSucesso: 'Fechar' ,
+          corBtnSucesso: 'warn',
+          possuirBtnFechar: false
+        } as Alerta
+      }
+      this.dialog.open(AlertaComponent,config);
     });
   }
 }
