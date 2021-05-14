@@ -1,0 +1,11 @@
+<mat-list *ngIf="!filme">
+  <mat-list-item >nenhum filme foi encontrado</mat-list-item>
+</mat-list>
+<mat-list *ngIf="filme">
+  <mat-list-item >Título: {{filme.titulo}}</mat-list-item>
+  <mat-list-item >Data de lançamento: {{filme.dtLancamento | date: 'dd/MM/yyyy'}}</mat-list-item>
+  <mat-list-item >Gênero: {{filme.genero}} | Nota: {{filme.nota}}</mat-list-item><br><br>
+  <mat-list-item >Descrição: "{{filme.descricao}}"</mat-list-item><br><br>
+  <mat-list-item ><a style="color: yellow" [href]="filme.urlIMDb" target="_blank">Ver detalhes do filme no site do Imbd</a></mat-list-item>
+  <img mat-card-image [src]="filme.urlFoto.indexOf('http')==0 ? filme.urlFoto : staticPhoto" >
+</mat-list>

@@ -23,4 +23,8 @@ export class FilmesService {
   salvar(filme : Filme) : Observable<Filme> {
     return this.httpClient.post<Filme>(url,filme);
   }
+
+  visualizar(id : number) : Observable<Filme>{
+    return this.httpClient.get<Filme>(url + id);
+  }
 }

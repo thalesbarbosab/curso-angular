@@ -20,7 +20,10 @@
     </div>
   </form>
 </mat-card>
-<div class="home-content" infiniteScroll (scrolled)="this.onScroll()">
+<mat-list *ngIf="!this.filmes">
+  <mat-list-item >nenhum filme foi encontrado</mat-list-item>
+</mat-list>
+<div class="home-content" infiniteScroll (scrolled)="this.onScroll()" *ngIf="this.filmes">
   <mat-card class="home-card"
             *ngFor="let item of this.filmes"
             >
@@ -36,7 +39,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button color="accent" (click)="open()" mat-raised-button>Abrir</button>
+      <button color="accent" (click)="open(item.id)" mat-raised-button>Abrir</button>
     </mat-card-actions>
   </mat-card>
 </div>
