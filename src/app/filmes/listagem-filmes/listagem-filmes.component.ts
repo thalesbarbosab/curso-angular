@@ -1,8 +1,10 @@
-import { ConfigParams } from './../../shared/models/config-params';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { FilmesService } from './../../core/filmes.service';
 import { Component, OnInit } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
+
 import { Filme } from 'src/app/shared/models/filme';
+import { FilmesService } from './../../core/filmes.service';
+import { ConfigParams } from './../../shared/models/config-params';
 
 @Component({
   selector: 'dio-listagem-filmes',
@@ -16,10 +18,7 @@ export class ListagemFilmesComponent implements OnInit {
     limit: 5,
 
   }
-  //readonly limite = 5;
-  //pagina = 0;
-  //texto : string = '';
-  //genero : string = '';
+  staticPhoto : string = "https://storiavoce.com/wp-content/plugins/lightbox/images/No-image-found.jpg"
   filmes : Filme[] = [];
   filtrosListagem: FormGroup;
   generos : Array<string>;
@@ -32,11 +31,14 @@ export class ListagemFilmesComponent implements OnInit {
       texto: [''],
       genero: ['']
     });
-    this.filtrosListagem.get('texto').valueChanges.subscribe((val : string)=>{
+    this.filtrosListagem.get('texto').valueChanges
+    .pipe(debounceTime(1000))
+    .subscribe((val : string)=>{
       this.config.search = val;
       this.resetarListagem();
     })
-    this.filtrosListagem.get('genero').valueChanges.subscribe((val : string)=>{
+    this.filtrosListagem.get('genero').valueChanges
+    .subscribe((val : string)=>{
       this.config.field = {type: 'genero', value: val};
       this.resetarListagem();
     })

@@ -29,7 +29,7 @@
       <mat-card-title>{{item.titulo}}</mat-card-title>
       <mat-card-subtitle>{{item.genero}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="item.urlFoto" >
+    <img mat-card-image [src]="item.urlFoto.indexOf('http')==0 ? item.urlFoto : staticPhoto" >
     <mat-card-content>
       <p>
         {{item.descricao}}
