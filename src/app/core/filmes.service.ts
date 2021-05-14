@@ -1,3 +1,5 @@
+import { ConfigParams } from './../shared/models/config-params';
+import { ConfigParamsService } from './config-params.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Filme } from './../shared/models/filme';
@@ -10,21 +12,12 @@ const url = "http://localhost:3000/filmes/";
 })
 export class FilmesService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient,
+              private configParamsService : ConfigParamsService) { }
 
-  listar(page:number,limit:number,text:string,gender:string) : Observable<Filme[]> {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.set('_page',page.toString());
-    httpParams =  httpParams.set('_limit',limit.toString());
-    //httpParams =  httpParams.set('_sort','titulo');
-    //httpParams =  httpParams.set('_order','desc');
-    if(text){
-      httpParams =  httpParams.set('q',text.toString());
-    }
-    if(gender){
-      httpParams =  httpParams.set('genero',gender.toString());
-    }
-    return this.httpClient.get<Filme[]>(url, {params: httpParams});
+  listar(config:ConfigParams) : Observable<Filme[]> {
+    const configParams = this.configParamsService.configureParams(config);
+    return this.httpClient.get<Filme[]>(url, {params: configParams});
   }
 
   salvar(filme : Filme) : Observable<Filme> {
