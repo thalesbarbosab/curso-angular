@@ -16,7 +16,7 @@ export class AlertaComponent implements OnInit {
     btnCancelar: 'Cancelar',
     corBtnSucesso: 'accent',
     corBtnCancelar: 'warn',
-    possuirBtnFechar: true
+    possuirBtnFechar: false
   } as Alerta;
 
   constructor(public dialogRef: MatDialogRef<AlertaComponent>,

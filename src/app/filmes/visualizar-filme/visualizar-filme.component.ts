@@ -66,6 +66,10 @@ export class VisualizarFilmeComponent implements OnInit {
     });
   }
 
+  public edit(){
+    this.router.navigateByUrl('/filmes/cadastro/'+ this.id);
+  }
+
   private view() : void {
     this.filmeService.visualizar(this.id).subscribe((filme : Filme)=>{
       this.filme = filme;
