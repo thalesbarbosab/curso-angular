@@ -1,6 +1,13 @@
 <mat-list *ngIf="!filme">
   <mat-list-item >nenhum filme foi encontrado</mat-list-item>
 </mat-list>
+<mat-card>
+  <mat-card-actions>
+    <button color="primary" (click)="this.backToAll()" mat-raised-button>Voltar</button>
+    <button color="accent" mat-raised-button>Editar</button>
+    <button color="warn" (click)="this.delete()" mat-raised-button>Excluir</button>
+  </mat-card-actions>
+</mat-card>
 <mat-list *ngIf="filme">
   <mat-list-item >Título: {{filme.titulo}}</mat-list-item>
   <mat-list-item >Data de lançamento: {{filme.dtLancamento | date: 'dd/MM/yyyy'}}</mat-list-item>
